@@ -21,3 +21,11 @@ inner join address a
 select c.first_name, c._last_name, a.address
 from customer c, address a
 where c.address_id = a.address_id
+
+--- Join 3 tables
+select c.first_name, c.last_name, a.address, ct.city
+from customer c
+inner join address a
+	on c.address_id  = a.address_id 
+	inner join city ct
+	on a.city_id = ct.city_id 
