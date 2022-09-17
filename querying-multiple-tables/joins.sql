@@ -29,3 +29,11 @@ inner join address a
 	on c.address_id  = a.address_id 
 	inner join city ct
 	on a.city_id = ct.city_id 
+
+--- Join 3 tables with 'USING' subclause
+select c.first_name, c.last_name, a.address, ct.city
+from customer c
+inner join address a
+	using (address_id) 
+	inner join city ct
+	using (city_id) 
