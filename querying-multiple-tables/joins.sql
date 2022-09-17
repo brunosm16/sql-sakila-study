@@ -37,3 +37,11 @@ inner join address a
 	using (address_id) 
 	inner join city ct
 	using (city_id) 
+
+--- Using STRAIGHT_JOIN to define table orden in join
+select STRAIGHT_JOIN c.first_name, c.last_name, a.address, ct.city
+from city ct
+inner join address a
+	using (city_id)
+	inner join customer c
+	using (address_id)
