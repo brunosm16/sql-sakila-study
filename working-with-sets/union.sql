@@ -24,3 +24,13 @@ from customer c
 where c.first_name LIKE 'J%' and c.last_name like 'D%'
 order by first_name, last_name;
 
+-- Union names that start with L
+select a.first_name fname, a.last_name lname
+from actor a
+where a.first_name LIKE 'L%'
+union
+select c.first_name, c.last_name
+from customer c
+where c.first_name LIKE 'L%'
+order by fname, lname;
+
