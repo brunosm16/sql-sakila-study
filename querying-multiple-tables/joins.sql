@@ -12,7 +12,12 @@ inner join address a
     on c.address_id = a.address_id
 
 --- Subclause 'USING'
-select c.first_name, c.last_name, a.address_id
+select c.first_name, c.last_name, a.address
 from customer c
 inner join address a
     using (address_id)
+
+--- SQL92 Syntax
+select c.first_name, c._last_name, a.address
+from customer c, address a
+where c.address_id = a.address_id
