@@ -45,3 +45,15 @@ inner join address a
 	using (city_id)
 	inner join customer c
 	using (address_id)
+
+--- Using subquery on inner join
+select c.first_name, c.last_name, cali_addr.address, cali_addr.city
+from customer c
+	inner join
+	(select a.address_id, a.address, ct.city
+	 from address a
+	 	inner join city ct
+	 	on ct.city_id = a.city_id
+	 	where a.district = 'CALIFORNIA'
+	) cali_addr
+	on cali_addr.address_id = c.address_id;
