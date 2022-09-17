@@ -7,3 +7,9 @@ from payment p
 where amount >= 1
 group by customer_id
 order by max_amount desc;
+
+--- Distinct Count
+select 
+count(distinct customer_id) distinct_customers,
+count(customer_id) 
+from payment p;
