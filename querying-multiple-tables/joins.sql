@@ -57,3 +57,12 @@ from customer c
 	 	where a.district = 'CALIFORNIA'
 	) cali_addr
 	on cali_addr.address_id = c.address_id;
+
+--- Alternative of subquery join
+select c.first_name, c.last_name, a.address, ct.city
+from customer c
+	inner join address a
+	on a.address_id = c.address_id 
+	inner join city ct
+	on ct.city_id = a.city_id
+	where a.district = 'CALIFORNIA';
