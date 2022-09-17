@@ -8,5 +8,5 @@ join address a where a.address;
 
 select c.first_name, c.last_name, a.address
 from customer c 
-join address a
+inner join address a
     on c.address_id = a.address_id
