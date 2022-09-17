@@ -66,3 +66,19 @@ from customer c
 	inner join city ct
 	on ct.city_id = a.city_id
 	where a.district = 'CALIFORNIA';
+
+--- Using the same table in a join
+select f.title, a1.actor_id, a1.first_name, a1.last_name, a2.actor_id, a2.first_name, a2.last_name
+from film f
+	inner join film_actor fa1 
+	on fa1.film_id = f.film_id 
+	inner join actor a1
+	on fa1.actor_id = a1.actor_id 
+	inner join film_actor fa2
+	on fa2.film_id  = f.film_id 
+	inner join actor a2
+	on fa2.actor_id = a2.actor_id 
+where 
+(a1.first_name = 'CUBA' and a1.last_name = 'BIRCH')
+and
+(a2.first_name = 'CATE' and a2.last_name = 'MCQUEEN')
