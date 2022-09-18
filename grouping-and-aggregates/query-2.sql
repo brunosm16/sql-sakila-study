@@ -13,3 +13,15 @@ select
 count(distinct customer_id) distinct_customers,
 count(customer_id) 
 from payment p;
+
+-- Using having with group by
+select f.rating, fa.actor_id, 
+concat(a.first_name, ' ', a.last_name) full_name, 
+count(*) total_movies from film f
+	inner join film_actor fa 
+	on fa.film_id = f.film_id
+	inner join actor a
+	on a.actor_id = fa.actor_id
+where f.rating in('PG', 'G')
+group by f.rating, fa.actor_id, full_name
+having total_movies > 9;
