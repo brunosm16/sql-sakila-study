@@ -50,7 +50,7 @@ where fa.actor_id in (
 	)
 );
 
--- Customer that rented 20 films
+--- Customer that rented 20 films
 select c.customer_id, c.first_name, c.last_name
 from customer c
 where 20 = (
@@ -58,3 +58,13 @@ where 20 = (
 	where r.customer_id = c.customer_id 
 )
 group by customer_id;
+
+
+--- Rental between 180 and 240
+select concat(c.first_name, ' ', c.last_name)
+from customer c
+where (
+	select sum(p.amount) from payment p
+	where p.customer_id = c.customer_id 
+)
+between 180 and 240;
