@@ -48,5 +48,13 @@ where fa.actor_id in (
 		select f.film_id from film f
 		where f.rating in ('G', 'PG')
 	)
+);
+
+-- Customer that rented 20 films
+select c.customer_id, c.first_name, c.last_name
+from customer c
+where 20 = (
+	select count(*) from rental r
+	where r.customer_id = c.customer_id 
 )
-;
+group by customer_id;
