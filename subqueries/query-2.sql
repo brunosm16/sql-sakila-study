@@ -76,3 +76,16 @@ where exists (
 	select 1 from rental r 
 	where year(r.rental_date) > '2005' 
 	and r.customer_id = c.customer_id) ;
+
+/*
+ * Actors that doesn't have movies with rating 'R'
+ */
+select a.first_name, a.last_name 
+from actor a
+where not exists (
+	select 1 from film_actor fa 
+		inner join film f
+		on f.film_id = fa.film_id 
+	where fa.actor_id = a.actor_id
+	and f.rating = 'R'
+);
