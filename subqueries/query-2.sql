@@ -68,3 +68,11 @@ where (
 	where p.customer_id = c.customer_id 
 )
 between 180 and 240;
+
+-- Using Exists
+select c.first_name, c.last_name 
+from customer c
+where exists (
+	select 1 from rental r 
+	where year(r.rental_date) > '2005' 
+	and r.customer_id = c.customer_id) ;
