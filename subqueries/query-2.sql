@@ -13,7 +13,26 @@ having rentals > all (
 		on ct.city_id = a.city_id
 		inner join country coun
 		on coun.country_id = ct.country_id
-	where coun.country in ('Mexico')
+	where coun.country in ('Canada', 'Mexico', 'United States')
+	group by c.customer_id
+)
+order by count(*) desc;
+
+select r.customer_id, count(*) rentals 
+from rental r
+group by r.customer_id
+having rentals > any (
+	select count(*) total_rentals
+	from customer c
+		inner join rental r
+		on c.customer_id = r.customer_id
+		inner join address a
+		on c.address_id = a.address_id
+		inner join city ct
+		on ct.city_id = a.city_id
+		inner join country coun
+		on coun.country_id = ct.country_id
+	where coun.country in ('Canada', 'Mexico', 'United States')
 	group by c.customer_id
 )
 order by count(*) desc;
