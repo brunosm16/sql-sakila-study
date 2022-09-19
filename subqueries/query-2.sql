@@ -36,3 +36,17 @@ having rentals > any (
 	group by c.customer_id
 )
 order by count(*) desc;
+
+-- Multicolumn subquery
+-- Actor in movies that has rating 'G' and 'PG'
+select fa.actor_id, fa.film_id
+from film_actor fa
+where fa.actor_id in (
+	select a.actor_id from actor a
+	where a.first_name = 'PENELOPE'
+	and fa.film_id in (
+		select f.film_id from film f
+		where f.rating in ('G', 'PG')
+	)
+)
+;
