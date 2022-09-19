@@ -35,3 +35,16 @@ all (
 )
 group by c.customer_id, p.amount
 order by p.amount asc;
+
+--- Instead of using ALL <>, uses Not In because is more readable
+select c.customer_id, c.first_name, c.last_name, p.amount
+from customer c
+	inner join payment p
+	on p.customer_id = c.customer_id
+where c.customer_id not in (
+	select p2.customer_id
+	from payment p2
+	where p2.amount = 0
+)
+group by c.customer_id, p.amount
+order by p.amount asc;
