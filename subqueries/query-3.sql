@@ -43,3 +43,10 @@ from (
 	on ct.city_id = a.city_id
 ;
 
+-- Inserting using subquery
+insert into film_actor (actor_id, film_id, last_update)
+values (
+	(select actor_id from actor where first_name = 'PENELOPE' and last_name = 'GUINESS'),
+	(select film_id from film where title = 'ACE GOLDFINGER'),
+	now()
+);
