@@ -11,3 +11,13 @@ from inventory i
 	right outer join film f
 	on f.film_id = i.film_id
 group by i.inventory_id, f.title;
+
+-- All films that has rental and has inventory
+select f.title, i.inventory_id, r.rental_id
+from film f
+	left outer join inventory i
+	on i.film_id = f.film_id
+	left outer join rental r
+	on r.inventory_id = i.inventory_id
+group by i.inventory_id, f.title, r.rental_id
+;
