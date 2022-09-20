@@ -25,3 +25,21 @@ from (
 	) types
 	on payment_temp.amount between types.lower_limit and types.upper_limit
 group by types.type_user;
+
+/**
+ Use the subquery as temp table and join other tables to get information
+ */
+select concat(c.first_name, ' ', c.last_name), ct.city, payment_temp.amount, payment_temp.payments
+from (
+	select p.customer_id, sum(p.amount) amount, count(*) payments
+	from payment p
+	group by p.customer_id
+) payment_temp
+	inner join customer c
+	on c.customer_id = payment_temp.customer_id
+	inner join address a
+	on a.address_id = c.address_id
+	inner join city ct
+	on ct.city_id = a.city_id
+;
+
