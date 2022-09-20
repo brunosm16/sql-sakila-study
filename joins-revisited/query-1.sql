@@ -19,5 +19,14 @@ from film f
 	on i.film_id = f.film_id
 	left outer join rental r
 	on r.inventory_id = i.inventory_id
-group by i.inventory_id, f.title, r.rental_id
-;
+group by i.inventory_id, f.title, r.rental_id;
+
+-- Natural Join with only wanted columns from customer
+select cstmer.customer_id, cstmer.full_name, r.rental_id 
+from (
+	select c.customer_id, concat(c.first_name, ' ', c.last_name) full_name 
+	from customer c
+) cstmer
+natural join rental r
+group by r.rental_id 
+order by r.customer_id;
