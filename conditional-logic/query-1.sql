@@ -18,3 +18,13 @@ select c.first_name, c.last_name,
 	end total_rentals
 from customer c
 order by total_rentals;
+
+-- Selecting all May Rentals
+select 
+sum(
+	 case when monthname(r.rental_date) = 'May'
+ 		then 1
+	 	else 0
+	 end 
+) may_rentals
+from rental r;
