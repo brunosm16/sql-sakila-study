@@ -28,3 +28,17 @@ sum(
 	 end 
 ) may_rentals
 from rental r;
+
+-- All PG movies by actors
+select a.actor_id, a.first_name, a.last_name,
+	case 
+		when exists(
+			select 1 from film_actor fa 
+			inner join film f
+			on f.film_id = fa.film_id
+			where f.rating = 'G' and a.actor_id = fa.actor_id 
+		) then 'Yes'
+		else 'NO'
+	end pg_movies
+from actor a
+order by pg_movies asc;
