@@ -24,3 +24,20 @@ create view active_customers_vw(
   concat(substr(email, 1, 2), '*****', substr(email, -4)) email
   from customer c
   where c.active = 1;
+
+-- Create view for sales_by_category
+create view total_sales_by_category
+as select c.name as category, count(p.amount) total_sales 
+from payment p
+	inner join rental r
+	on r.rental_id = p.rental_id
+	inner join inventory i
+	on i.inventory_id = r.inventory_id
+	inner join film f
+	on f.film_id = i.film_id
+	inner join film_category fc 
+	on fc.film_id = f.film_id
+	inner join category c
+	on c.category_id = fc.category_id
+group by c.name
+order by total_sales asc;
