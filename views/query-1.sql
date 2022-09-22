@@ -41,3 +41,26 @@ from payment p
 	on c.category_id = fc.category_id
 group by c.name
 order by total_sales asc;
+
+-- View for movie stats
+create view movie_stats as
+select f.film_id, f.title,
+(select c.name from film_category fc 
+	inner join category c 
+	on c.category_id = fc.category_id 
+	where fc.film_id = f.film_id
+)category,
+(select count(*) from film_actor fa
+	inner join actor a
+	on fa.actor_id = a.actor_id
+	where fa.film_id = f.film_id
+)actors,
+(select count(*) from inventory i 
+	where i.film_id = f.film_id
+)films,
+(select count(*) from rental r
+	inner join inventory i2
+	on i2.inventory_id = r.inventory_id
+	where i2.film_id = f.film_id
+)total_rentals
+from film f;
