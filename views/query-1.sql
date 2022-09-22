@@ -13,3 +13,14 @@ from customer_vw c
 	inner join payment p
 	on p.customer_id = c.customer_id
 group by c.customer_id;
+
+-- View for active_customers
+create view active_customers_vw(
+	customer_id,
+	first_name, 
+	last_name,
+	email
+) as select c.customer_id, c.first_name, c.last_name, 
+  concat(substr(email, 1, 2), '*****', substr(email, -4)) email
+  from customer c
+  where c.active = 1;
