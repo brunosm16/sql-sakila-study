@@ -64,3 +64,6 @@ select f.film_id, f.title,
 	where i2.film_id = f.film_id
 )total_rentals
 from film f;
+
+-- Update a view
+update customer_vw set first_name = 'MARIA' where customer_id =1;
