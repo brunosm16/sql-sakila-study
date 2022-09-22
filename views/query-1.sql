@@ -70,4 +70,7 @@ update customer_vw set first_name = 'MARIA' where customer_id = 1;
 
 -- Attempts to update a email but since email is from a derived expression
 -- email can't be updated
-update customer_vw set email = 'maria@hotmail.com' where customer_id =1;
+update customer_vw set email = 'maria@hotmail.com' where customer_id = 1;
+
+-- Invalid insertion
+insert into customer_vw(customer_id, first_name, last_name) values('600', 'bruno', 'moraes');
