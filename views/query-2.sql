@@ -23,3 +23,17 @@ from country c
 	left outer join payment p
 	on p.customer_id = cstmer.customer_id
 group by c.country_id;
+
+-- Creates view for country payments with scalar subquery
+create view country_payments_scalar as select c.country, c.country_id,
+(
+	select sum(p.amount) from city ct
+	inner join address a 
+	on a.city_id = ct.city_id
+	inner join customer cstmer
+	on cstmer.address_id = a.address_id
+	inner join payment p
+	on p.customer_id = cstmer.customer_id
+	where c.country_id = ct.country_id
+) total_payments
+from country c;
