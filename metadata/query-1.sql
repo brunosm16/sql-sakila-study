@@ -24,7 +24,7 @@ select s.INDEX_NAME, s.COLUMN_NAME, s.NON_UNIQUE, s.SEQ_IN_INDEX
 from information_schema.STATISTICS s
 where TABLE_SCHEMA = 'sakila' and table_name = 'customer';
 
--- Information about constrains
+-- Information about constraints
 select tc.CONSTRAINT_NAME, tc.CONSTRAINT_TYPE, tc.TABLE_NAME
 from information_schema.TABLE_CONSTRAINTS tc
 where TABLE_SCHEMA = 'sakila' and table_name = 'customer';
