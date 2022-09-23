@@ -74,3 +74,15 @@ update customer_vw set email = 'maria@hotmail.com' where customer_id = 1;
 
 -- Invalid insertion
 insert into customer_vw(customer_id, first_name, last_name) values('600', 'bruno', 'moraes');
+
+-- Create view for customer_details
+create view customer_details as 
+select c.customer_id, c.first_name, c.last_name, c.store_id, 
+a.address, a.postal_code, ct.city, cntry.country
+from customer c
+	inner join address a
+	on a.address_id = c.address_id
+	inner join city ct
+	on ct.city_id = a.city_id
+	inner join country cntry
+	on cntry.country_id = ct.country_id;
