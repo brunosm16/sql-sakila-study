@@ -86,3 +86,7 @@ from customer c
 	on ct.city_id = a.city_id
 	inner join country cntry
 	on cntry.country_id = ct.country_id;
+
+-- Update customer_details view
+update customer_details set last_name = 'McCain'
+where customer_id = 218;
