@@ -90,3 +90,7 @@ from customer c
 -- Update customer_details view
 update customer_details set last_name = 'McCain'
 where customer_id = 218;
+
+-- Don't allow update because tries to change another table
+update customer_details set last_name = 'McCain', address = 'Monte Castelo'
+where customer_id = 218;
