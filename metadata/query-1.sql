@@ -18,3 +18,8 @@ NUMERIC_SCALE num_scale
 from information_schema.columns
 where TABLE_SCHEMA = 'sakila' and table_name = 'customer'
 order by ORDINAL_POSITION;
+
+-- Information about table indexes
+select s.INDEX_NAME, s.COLUMN_NAME, s.NON_UNIQUE, s.SEQ_IN_INDEX 
+from information_schema.STATISTICS s
+where TABLE_SCHEMA = 'sakila' and table_name = 'customer';
